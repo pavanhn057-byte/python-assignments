@@ -1,0 +1,44 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+import time
+
+# Setup Chrome browser
+options = webdriver.ChromeOptions()
+options.add_argument("--start-maximized")
+
+driver = webdriver.Chrome(
+    service=Service(ChromeDriverManager().install()),
+    options=options
+)
+
+# Open demo website
+driver.get("https://quotes.toscrape.com")
+time.sleep(2)
+
+quotes_data = []
+
+# Find all quote blocks
+quotes = driver.find_elements(By.CLASS_NAME, "quote")
+
+for quote in quotes:
+    text = quote.find_element(By.CLASS_NAME, "text").text
+    author = quote.find_element(By.CLASS_NAME, "author").text
+    tags = quote.find_elements(By.CLASS_NAME, "tag")
+    tag_list = [tag.text for tag in tags]
+
+    quotes_data.append({
+        "quote": text,
+        "author": author,
+        "tags": tag_list
+    })
+
+# Print scraped data
+for q in quotes_data:
+    print("Quote :", q["quote"])
+    print("Author:", q["author"])
+    print("Tags  :", ", ".join(q["tags"]))
+    print("-" * 50)
+
+driver.quit()
