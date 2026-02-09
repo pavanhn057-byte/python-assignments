@@ -15,3 +15,13 @@ gen = simple_generator()
 print(next(gen))  # First value
 print(next(gen))  # Second value
 print(next(gen))  # Third value
+
+output
+
+Start
+1
+Middle
+2
+End
+3
+
