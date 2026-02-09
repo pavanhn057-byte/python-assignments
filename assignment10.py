@@ -20,3 +20,17 @@ for i in range(5):
 print("\nMemory used by List:", sys.getsizeof(list_numbers))
 print("Memory used by Generator:", sys.getsizeof(generator_numbers))
 
+List: [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+Generator gives these values:
+0 1 4 9 16 25 36 49 64 81 
+
+Empty generator now:
+Difference between lists and generators:-
+
+List stores all elements in memory at once, generator generates values one by one which results into low memory usage
+List computes everything immediately, generator computes values only when requested
+List can be iterated multiple times, generators can be interated only once unless it is recreated
+List is useful for small datasets & random access, and generators are used when working with large datasets and where memory is limited
+Thus if data has to be iterated only once then use generator, if data is needed multiple times or want to find length using len() then use list
+
